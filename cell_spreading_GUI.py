@@ -68,7 +68,7 @@ tab2_layout = [
     
     [sg.Text("Settings:")],
     
-    [sg.Checkbox('Export data', default=True, key='-DATA-')],
+    [sg.Checkbox('Export data', default=True, key='-DATA2-')],
             
     [sg.Text('Acquisition interval (s): '), sg.InputText(key='-INTERVAL2-', size=(5, 1))],
     
@@ -159,7 +159,7 @@ while True:
             fname = os.path.basename(filepath)
             fname = re.sub('.tif', '', fname)
             print(fname)        
-            save_data = values['-DATA-']
+            save_data = values['-DATA2-']
             print(save_data)
             interval = int(values['-INTERVAL2-'])
             print(interval)            

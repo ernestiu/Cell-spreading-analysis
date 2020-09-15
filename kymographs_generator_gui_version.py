@@ -110,7 +110,7 @@ def kymo_generator(image, fname, save_data, interval, pixel_size, bit_depth, sma
     color_3 = '#ef5675'
     color_4 = '#ffa600'
     
-    fig = plt.figure(figsize=(20, 10), constrained_layout=True) # 20 in x and 10 in y
+    fig = plt.figure(figsize=(20, 10)) # 20 in x and 10 in y
     gs = gridspec.GridSpec(2, 4) # 2 in x and 4 in y
     axes0 = plt.subplot(gs[:,0:2])
     axes0.imshow(image[-1,:,:], cmap='Greys')
