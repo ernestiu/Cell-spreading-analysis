@@ -46,7 +46,7 @@ tab1_layout = [
     
     [sg.Text('Smallest cell area (um^2): '), sg.InputText(key='-CELL_SIZE-', size=(6, 1)), sg.Text(' (Try 33 um^2)')],
     
-    [sg.Text('Image bit depth: '), sg.Listbox(values=('8', '12', '16'), size=(3, 3), key='-BIT_DEPTH-')],
+    [sg.Text('Image bit depth: '), sg.Listbox(values=('8', '12', '16'), size=(2, 1), key='-BIT_DEPTH-')],
     
     [sg.Button("Run", key="-SUBMIT1-", enable_events=True), sg.Button('Cancel', key="-CANCEL-")]
 
@@ -76,7 +76,7 @@ tab2_layout = [
     
     [sg.Text('Smallest cell area (um^2): '), sg.InputText(key='-CELL_SIZE2-', size=(6, 1)), sg.Text(' (Try 33 um^2)')],
     
-    [sg.Text('Image bit depth: '), sg.Listbox(values=('8', '12', '16'), size=(3, 3), key='-BIT_DEPTH2-')],
+    [sg.Text('Image bit depth: '), sg.Listbox(values=('8', '12', '16'), size=(2, 1), key='-BIT_DEPTH2-')],
     
     [sg.Button("Run", key="-SUBMIT2-", enable_events=True), sg.Button('Cancel', key="-CANCEL-")]
      

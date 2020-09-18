@@ -37,20 +37,20 @@ def crop_cell(image, min_size=20000, max_size=90000, ar_thres=0.6):
         if min_row - 30 <= 0 or min_col - 30 <= 0 or max_row + 30 >= max_proj.shape[0] or max_col + 30 >= max_proj.shape[1]:
             num_1 = num_1 + 1
             rect_r = mpatches.Rectangle((min_col, min_row), max_col - min_col, max_row - min_row,
-                                        fill=False, edgecolor='red', linewidth=3)
+                                        fill=False, edgecolor='#989898', linewidth=3)
             ax.add_patch(rect_r)
         
         elif aspect_ratio < ar_thres:
             num_2 = num_2 + 1
             rect_r = mpatches.Rectangle((min_col, min_row), max_col - min_col, max_row - min_row,
-                                        fill=False, edgecolor='red', linewidth=3)
+                                        fill=False, edgecolor='#989898', linewidth=3)
             ax.add_patch(rect_r)
             
         else:
             if aCell.area > max_size:
                 num_3 = num_3 + 1
                 rect_r = mpatches.Rectangle((min_col, min_row), max_col - min_col, max_row - min_row,
-                                            fill=False, edgecolor='red', linewidth=3)
+                                            fill=False, edgecolor='#989898', linewidth=3)
                 ax.add_patch(rect_r)
                 
             else: 
@@ -60,7 +60,6 @@ def crop_cell(image, min_size=20000, max_size=90000, ar_thres=0.6):
                                           fill=False, edgecolor='green', linewidth=3)
                 ax.add_patch(rect)
     ax.set_axis_off()
-    plt.tight_layout()
     plt.show()            
     print('Summary: ')
     print(str(len(measure.regionprops(label_mask))) + ' cells are identified.')

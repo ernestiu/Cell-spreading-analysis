@@ -20,12 +20,12 @@ import re
 import os
 
 
-def cell_spreading(image, fname, save_masks, save_data, save_contour, show_img, interval, pixel_size, bit_depth, save_destination):
+def cell_spreading(image, fname, save_masks, save_data, save_contour, show_img, interval, pixel_size, bit_depth, small_obj, save_destination):
 
     cell_num, label_mask, bounding_box = crop_cell(image)
     
     all_cell_masks, all_cell_props = cell_seg(image, cell_num, bounding_box, filename = fname, save_destination = save_destination,
-                                              DEPTH = bit_depth, show_img = show_img, save_contour = save_contour)
+                                              DEPTH = bit_depth, show_img = show_img, save_contour = save_contour, small_obj=small_obj)
     
     all_cell_area, all_cell_aspect_ratio, all_cell_circularity = cell_measure(all_cell_props, pixel_size = pixel_size)
     
