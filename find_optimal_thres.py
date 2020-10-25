@@ -3,19 +3,6 @@
 find_optimal_thres finds the threshold separating the background and foreground.
 This code can be used for images with a uniform background
 and objects of one single intensity distribution.
-If the function fails, all the outputs would be 0.
-
-SYNOPSIS    (ans, thresh, max_bg, max_obj) = find_optimal_thres(img_in, DEPTH)
-
-INPUT       img       : the image
-            DEPTH     : bit depth of the image
-            
-
-OUTPUT      
-            thresh_val    : the threshold value
-            max_bg_val   : the mean value of the background
-            max_obj_val  : the mean value of the object
-                          
 """
 import numpy as np 
 from scipy import signal
