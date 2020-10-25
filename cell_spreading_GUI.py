@@ -38,13 +38,13 @@ tab1_layout = [
         
     [sg.Checkbox('Save contours', default=False, key='-CONTOUR-')],
     
+    [sg.Text('Smallest cell area (um^2): '), sg.InputText(key='-CELL_SIZE-', size=(6, 1)), sg.Text(' (Try 33 um^2)')],
+    
     [sg.Text("Image parameters:")],
     
     [sg.Text('Acquisition interval (s): '), sg.InputText(key='-INTERVAL-', size=(5, 1))],
     
     [sg.Text('Pixel size (um): '), sg.InputText(key='-PIXEL-', size=(5, 1))],
-    
-    [sg.Text('Smallest cell area (um^2): '), sg.InputText(key='-CELL_SIZE-', size=(6, 1)), sg.Text(' (Try 33 um^2)')],
     
     [sg.Text('Image bit depth: '), sg.Listbox(values=('8', '12', '16'), size=(2, 3), key='-BIT_DEPTH-')],
     
