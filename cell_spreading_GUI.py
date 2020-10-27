@@ -16,69 +16,69 @@ tab1_layout = [
 
 #image_params_column = [
 
-    [sg.Text("Image location")],
+    [sg.Text("Image location", font=('Arial', 11))],
 
     [sg.In(size=(25, 1), enable_events=True, key="-FOLDER1-"),
 
     sg.FileBrowse(target='-FOLDER1-', enable_events=True)],
     
-    [sg.Text("Data save to")],
+    [sg.Text("Data save to", font=('Arial', 11))],
     
     [sg.In(size=(25, 1), enable_events=True, key="-FOLDER3-"),
 
     sg.FolderBrowse(target='-FOLDER3-', enable_events=True)],
     
-    [sg.Text("Segmentation settings:")],
+    [sg.Text("Process settings:", font=('Arial', 12, 'bold'))],
         
-    [sg.Checkbox('Save masks', default=False, key='-MASK-')],
+    [sg.Checkbox('Save masks', default=False, key='-MASK-', font=('Arial', 11))],
         
-    [sg.Checkbox('Export data', default=True, key='-DATA-')],
+    [sg.Checkbox('Export data', default=True, key='-DATA-', font=('Arial', 11))],
          
-    [sg.Checkbox('Show segmentation (will take longer)', default=False, key='-SEG-')],
+    [sg.Checkbox('Show segmentation (will take longer)', default=False, key='-SEG-', font=('Arial', 11))],
         
-    [sg.Checkbox('Save contours', default=False, key='-CONTOUR-')],
+    [sg.Checkbox('Save contours', default=False, key='-CONTOUR-', font=('Arial', 11))],
     
-    [sg.Text('Smallest cell area (um^2): '), sg.InputText(key='-CELL_SIZE-', size=(6, 1)), sg.Text(' (Try 33 um^2)')],
+    [sg.Text('Smallest cell area (um^2): ', font=('Arial', 11)), sg.InputText(key='-CELL_SIZE-', size=(6, 1)), sg.Text(' (Try 33 um^2)', font=('Arial', 9))],
     
-    [sg.Text("Image parameters:")],
+    [sg.Text("Image parameters:", font=('Arial', 12, 'bold'))],
     
-    [sg.Text('Acquisition interval (s): '), sg.InputText(key='-INTERVAL-', size=(5, 1))],
+    [sg.Text('Acquisition interval (s): ', font=('Arial', 11)), sg.InputText(key='-INTERVAL-', size=(5, 1))],
     
-    [sg.Text('Pixel size (um): '), sg.InputText(key='-PIXEL-', size=(5, 1))],
+    [sg.Text('Pixel size (um): ', font=('Arial', 11)), sg.InputText(key='-PIXEL-', size=(5, 1))],
     
-    [sg.Text('Image bit depth: '), sg.Listbox(values=('8', '12', '16'), size=(2, 3), key='-BIT_DEPTH-')],
+    [sg.Text('Image bit depth: ', font=('Arial', 11)), sg.Listbox(values=('8', '12', '16'), size=(2, 3), key='-BIT_DEPTH-', font=('Arial', 10))],
     
-    [sg.Button("Run", key="-SUBMIT1-", enable_events=True), sg.Button('Cancel', key="-CANCEL-")]
+    [sg.Button("Run", key="-SUBMIT1-", enable_events=True, font=('Arial', 11)), sg.Button('Cancel', key="-CANCEL-", font=('Arial', 11))]
 
 ]
 
 tab2_layout = [
     
-    [sg.Text("Image location")],
+    [sg.Text("Image location", font=('Arial', 11))],
 
     [sg.In(size=(25, 1), enable_events=True, key="-FOLDER2-"),
 
     sg.FileBrowse(target='-FOLDER2-', enable_events=True)],  
     
-    [sg.Text("Data save to")],
+    [sg.Text("Data save to", font=('Arial', 11))],
     
     [sg.In(size=(25, 1), enable_events=True, key="-FOLDER4-"),
      
      sg.FolderBrowse(target='-FOLDER4-', enable_events=True)],
     
-    [sg.Text("Settings:")],
+    [sg.Text("Process settings:", font=('Arial', 12, 'bold'))],
     
-    [sg.Checkbox('Export data', default=True, key='-DATA2-')],
+    [sg.Checkbox('Export data', default=True, key='-DATA2-', font=('Arial', 11))],
             
-    [sg.Text('Acquisition interval (s): '), sg.InputText(key='-INTERVAL2-', size=(5, 1))],
+    [sg.Text('Acquisition interval (s): ', font=('Arial', 11)), sg.InputText(key='-INTERVAL2-', size=(5, 1))],
     
-    [sg.Text('Pixel size (um): '), sg.InputText(key='-PIXEL2-', size=(5, 1))],
+    [sg.Text('Pixel size (um): ', font=('Arial', 11)), sg.InputText(key='-PIXEL2-', size=(5, 1))],
     
-    [sg.Text('Smallest cell area (um^2): '), sg.InputText(key='-CELL_SIZE2-', size=(6, 1)), sg.Text(' (Try 33 um^2)')],
+    [sg.Text('Smallest cell area (um^2): ', font=('Arial', 11)), sg.InputText(key='-CELL_SIZE2-', size=(6, 1)), sg.Text(' (Try 33 um^2)', font=('Arial', 9))],
     
-    [sg.Text('Image bit depth: '), sg.Listbox(values=('8', '12', '16'), size=(2, 3), key='-BIT_DEPTH2-')],
+    [sg.Text('Image bit depth: ', font=('Arial', 11)), sg.Listbox(values=('8', '12', '16'), size=(2, 3), key='-BIT_DEPTH2-', font=('Arial', 10))],
     
-    [sg.Button("Run", key="-SUBMIT2-", enable_events=True), sg.Button('Cancel', key="-CANCEL-")]
+    [sg.Button("Run", key="-SUBMIT2-", enable_events=True, font=('Arial', 11)), sg.Button('Cancel', key="-CANCEL-", font=('Arial', 11))]
      
     
 ]
@@ -91,12 +91,12 @@ layout = [
     #[sg.Column(image_params_column)],
     
 
-    [sg.Text("by Ernest in 2020", justification='right')]
+    [sg.Text("by Ernest in 2020", justification='right', font=('Arial', 9), size=(50, 1))]
 
 ]
 
 
-window = sg.Window("Cell Spreading Analysis", layout, font=("Helvetica", 12))
+window = sg.Window("Cell Spreading Analysis", layout, font=("Arial", 12))
 
 
 # Run the Event Loop
