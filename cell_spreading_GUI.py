@@ -18,25 +18,27 @@ tab1_layout = [
 
     [sg.Text("Image location", font=('Arial', 11))],
 
-    [sg.In(size=(25, 1), enable_events=True, key="-FOLDER1-"),
+    [sg.In(size=(30, 1), enable_events=True, key="-FOLDER1-"),
 
     sg.FileBrowse(target='-FOLDER1-', enable_events=True)],
     
     [sg.Text("Data save to", font=('Arial', 11))],
     
-    [sg.In(size=(25, 1), enable_events=True, key="-FOLDER3-"),
+    [sg.In(size=(30, 1), enable_events=True, key="-FOLDER3-"),
 
     sg.FolderBrowse(target='-FOLDER3-', enable_events=True)],
     
-    [sg.Text("Process settings:", font=('Arial', 12, 'bold'))],
+    [sg.Text("Output settings:", font=('Arial', 12, 'bold'))],
         
     [sg.Checkbox('Save masks', default=False, key='-MASK-', font=('Arial', 11))],
         
     [sg.Checkbox('Export data', default=True, key='-DATA-', font=('Arial', 11))],
-         
-    [sg.Checkbox('Show segmentation (will take longer)', default=False, key='-SEG-', font=('Arial', 11))],
         
     [sg.Checkbox('Save contours', default=False, key='-CONTOUR-', font=('Arial', 11))],
+    
+    [sg.Text("Segmentation settings:", font=('Arial', 12, 'bold'))],
+    
+    [sg.Checkbox('Show segmentation (will take longer)', default=False, key='-SEG-', font=('Arial', 11))],
     
     [sg.Text('Smallest cell area (um^2): ', font=('Arial', 11)), sg.InputText(key='-CELL_SIZE-', size=(6, 1)), sg.Text(' (Try 33 um^2)', font=('Arial', 9))],
     
@@ -56,19 +58,21 @@ tab2_layout = [
     
     [sg.Text("Image location", font=('Arial', 11))],
 
-    [sg.In(size=(25, 1), enable_events=True, key="-FOLDER2-"),
+    [sg.In(size=(30, 1), enable_events=True, key="-FOLDER2-"),
 
     sg.FileBrowse(target='-FOLDER2-', enable_events=True)],  
     
     [sg.Text("Data save to", font=('Arial', 11))],
     
-    [sg.In(size=(25, 1), enable_events=True, key="-FOLDER4-"),
+    [sg.In(size=(30, 1), enable_events=True, key="-FOLDER4-"),
      
      sg.FolderBrowse(target='-FOLDER4-', enable_events=True)],
     
-    [sg.Text("Process settings:", font=('Arial', 12, 'bold'))],
+    [sg.Text("Output settings:", font=('Arial', 12, 'bold'))],
     
     [sg.Checkbox('Export data', default=True, key='-DATA2-', font=('Arial', 11))],
+    
+    [sg.Text("Image parameters:", font=('Arial', 12, 'bold'))],
             
     [sg.Text('Acquisition interval (s): ', font=('Arial', 11)), sg.InputText(key='-INTERVAL2-', size=(5, 1))],
     
@@ -91,7 +95,7 @@ layout = [
     #[sg.Column(image_params_column)],
     
 
-    [sg.Text("by Ernest in 2020", justification='right', font=('Arial', 9), size=(50, 1))]
+    [sg.Text("by Ernest in 2020", justification='right', font=('Arial', 9), size=(52, 1))]
 
 ]
 
