@@ -1,5 +1,8 @@
-# -*- coding: utf-8 -*-
+"""
+This script includes a function that performs segmentation on an image without cropping the cell out.
 
+By Ernest Iu Dec 2020
+"""
 import numpy as np
 from skimage import measure, filters
 import matplotlib.pyplot as plt
@@ -16,7 +19,45 @@ save_destination = script_dir
 
 
 def cell_seg_no_cell_crop(image, filename, save_destination = save_destination, cell_num = 1, sigma = 1, MEDIAN_F = 3, SE = disk(6), DEPTH = 16, tolerance = 2000, small_obj = 1000, show_img = False, save_contour = False):
-    # create placeholders to store masks and regionprops
+    """
+
+    Parameters
+    ----------
+    image : array
+        The input image.
+    filename : string
+        The filaname of the image.
+    save_destination : string, optional
+        The saving directory. The default is save_destination.
+    cell_num : integer, optional
+        The number of cell analyzed. This should always be 1.
+    sigma : integer, optional
+        The degree of Gaussian blur. The default is 1.
+    MEDIAN_F : integer, optional
+        The size of median filter. The default is 3.
+    SE : array, optional
+        The structuring element used for morphological operations. The default is disk(6).
+    DEPTH : integer, optional
+        The image bit depth. The default is 16.
+    tolerance : integer, optional
+        The maximum number of pixels allowed to be removed after morphological operations. The default is 2000 pixels.
+    small_obj : integer, optional
+        The smallest object allowed. The default is 1000 pixels.
+    show_img : boolean, optional
+        Whether to show images or not. The default is False.
+    save_contour : boolean, optional
+        Whether to save the cell contours or not. The default is False.
+
+    Returns
+    -------
+    all_cell_masks : list
+        A list of boolean masks
+    all_cell_props : list
+        A list of regionprops
+
+    """
+    
+   # create placeholders to store masks and regionprops
     all_cell_masks = [] #check line 77 and 100
     all_cell_props = []
     

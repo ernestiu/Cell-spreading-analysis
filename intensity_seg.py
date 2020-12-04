@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Jul  7 12:17:56 2020
+This script includes two functions that performs segmentation using threshold_triangle function. intensity_seg is a more lenient thresholding function
+while intensity_seg_str is a more strict function.
 
-@author: ernes
+By Ernest Iu, Dec 2020
 """
 
 from skimage import filters, morphology, measure

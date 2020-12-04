@@ -1,15 +1,31 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Aug 25 12:09:02 2020
 
-@author: ernes
-"""
 import numpy as np
 import statistics
 from skimage import filters, morphology, measure
 import matplotlib.pyplot as plt
 
 def kymo_to_coords(kymo, thres=15, pixel_length = 0.1833333):
+    """
+    This function takes a kymograph and extract the membrane position from the image.
+
+    Parameters
+    ----------
+    kymo : array
+        A kymograph.
+    thres : integer, optional
+        The largest membrane displacement allowed in a frame. The default is 15 pixels.
+    pixel_length : integer, optional
+        The pixel size. The default is 0.1833333.
+
+    Returns
+    -------
+    normalized_coords : list
+        A list of coordinates in tuples where the lowest point is normalized to 0.
+    filtered_coords : list
+        A list of coordinates in tuples where extremas are filtered and replaced by the interpolated position between frames.
+
+    """
     
     smooth_kymo = filters.median(kymo > 0, morphology.disk(3))
     # plt.imshow(smooth_kymo)
