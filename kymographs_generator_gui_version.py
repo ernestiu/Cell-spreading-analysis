@@ -2,7 +2,7 @@
 """
 This function creates kymographs from a stack of images.
 
-@author: ernes
+By Ernest Dec 2020
 """
 
 from skimage import io, measure
@@ -16,7 +16,33 @@ import pandas as pd
 import os
 
 def kymo_generator(image, fname, save_data, interval, pixel_size, bit_depth, small_obj = 1000, save_destination = os.path.dirname(__file__)):
-    
+    """
+    This function takes an image, generates four kymographs, and analyze them.
+
+    Parameters
+    ----------
+    image : array
+        An input image.
+    fname : string
+        The filename.
+    save_data : boolean
+        Whether to save the data.
+    interval : integer
+        The interval at which images were acquired (e.g. every 5 seconds)
+    pixel_size : integer
+        The pixel size of the image.
+    bit_depth : integer
+        The bit depth of the image.
+    small_obj : integer, optional
+        The smallest object allowed. The default is 1000 pixels.
+    save_destination : string, optional
+        The saving directory. The default is os.path.dirname(__file__).
+
+    Returns
+    -------
+    A confirmation note "done".
+
+    """
     all_cell_masks, all_cell_props = cell_seg_no_cell_crop(image, filename = fname, DEPTH = bit_depth, small_obj = small_obj,
                                                             show_img = False,  save_contour = False)
     

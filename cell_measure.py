@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri Jul 17 17:31:36 2020
+This script includes a function that takes regionprops and generates the properties of the regionprops
 
-@author: ernes
+By Ernest Iu Dec 2020
 """
 import numpy as np
 #from skimage import measure, feature
@@ -10,6 +10,23 @@ import matplotlib.pyplot as plt
 from scipy.signal import savgol_filter
 
 def cell_measure(props, pixel_size):
+    """
+
+    Parameters
+    ----------
+    props : dictionary
+        A regionprop.
+    pixel_size : integer
+        The pixel size of the image.
+
+    Returns
+    -------
+    all_cell_area : a numpy array consisted of all area measurements 
+    all_cell_aspect_ratio: a numpy array consisted of all aspect ratio measurements 
+    all_cell_circularity: a numpy array consisted of all circularity measurements 
+
+
+    """
     
     all_cell_area = []
     all_cell_aspect_ratio = []

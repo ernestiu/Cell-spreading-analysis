@@ -3,6 +3,8 @@
 find_optimal_thres finds the threshold separating the background and foreground.
 This code can be used for images with a uniform background
 and objects of one single intensity distribution.
+
+By Ernest Dec 2020
 """
 import numpy as np 
 from scipy import signal

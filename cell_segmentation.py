@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Jul 16 22:42:17 2020
+There are two functions in this script: cell_seg requires the cropping function and cell_seg_no_cell_crop doesn't. They both take an 
+image and perform image segmentation.
 
-@author: ernes
+By Ernest Dec 2020
 """
 import numpy as np
 from skimage import measure, filters
@@ -16,6 +17,44 @@ from scipy.ndimage import gaussian_filter
 import os
 
 def cell_seg(image, cell_num, bounding_box, filename, save_destination = os.path.dirname(__file__), sigma = 1, MEDIAN_F = 3, SE = disk(6), DEPTH = 16, tolerance = 2000, small_obj = 1000, show_img = False, save_contour = False):
+    """    
+    Parameters
+    ----------
+    image : array
+        An image.
+    cell_num : integer
+        The total number of cells detected by crop_cell function.
+    bounding_box : list
+        A list of tuples that indicate the 4 corners of each bounding box
+    filename : string
+        The filename of the image
+    save_destination : string, optional
+        The saving destination of the masks, images etc. The default is the directory of the script.
+    sigma : integer, optional
+        The degree of Gaussian blur. The default is 1.
+    MEDIAN_F : integer, optional
+        The size of median filter. The default is 3.
+    SE : array, optional
+        The structuring element used for morphological operations. The default is disk(6).
+    DEPTH : integer, optional
+        The image bit depth. The default is 16.
+    tolerance : integer, optional
+        The maximum number of pixels allowed to be removed after morphological operations. The default is 2000 pixels.
+    small_obj : integer, optional
+        The smallest object allowed. The default is 1000 pixels.
+    show_img : boolean, optional
+        Whether to show images or not. The default is False.
+    save_contour : boolean, optional
+        Whether to save the cell contours or not. The default is False.
+
+    Returns
+    -------
+    all_cell_masks : list
+        A list of binary masks generated from cell segmentation.
+    all_cell_props : list
+        A list of regionprops of each cell and each binary mask.
+
+    """
     # create placeholders to store masks and regionprops
     all_cell_masks = [] #check line 77 and 100
     all_cell_props = []

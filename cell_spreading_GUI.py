@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Sep  8 13:21:43 2020
+This is the GUI for cell spreading analysis.
+Simply click Run to initial the GUI.
 
-@author: ernes
+By Ernest Dec 2020
 """
 
 import PySimpleGUI as sg

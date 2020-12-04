@@ -1,6 +1,7 @@
 '''
-find_relevant_max extracts the relevant maximas
+find_relevant_max extracts the relevant maximas and minimas 
 
+By Ernest Dec 2020
                            
 '''
 import numpy as np
