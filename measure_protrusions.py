@@ -38,7 +38,7 @@ def measure_protrusions(normalized_coords, frame_rate = 6):
     # find peaks (i.e. protrusions)
     maxima, _ = find_peaks(normalized_coords, distance=3)
     maxima = maxima[maxima >= lowest_point_idx]
-    minima, _ = find_peaks([normalized_coords[k]*-1 for k in range(len(normalized_coords))], distance=3)
+    minima, _ = find_peaks([normalized_coords[k]*-1 for k in range(lowest_point_idx, len(normalized_coords))], distance=3)
     minima = minima[minima > lowest_point_idx]
     
     spread_duration = len(normalized_coords[lowest_point_idx:]) # in terms of number of frames
