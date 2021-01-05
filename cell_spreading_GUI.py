@@ -23,7 +23,7 @@ tab1_layout = [
 
     sg.FileBrowse(target='-FOLDER1-', enable_events=True)],
     
-    [sg.Text("Data save to", font=('Arial', 11))],
+    [sg.Text("Save data to", font=('Arial', 11))],
     
     [sg.In(size=(30, 1), enable_events=True, key="-FOLDER3-"),
 
@@ -63,7 +63,7 @@ tab2_layout = [
 
     sg.FileBrowse(target='-FOLDER2-', enable_events=True)],  
     
-    [sg.Text("Data save to", font=('Arial', 11))],
+    [sg.Text("Save data to", font=('Arial', 11))],
     
     [sg.In(size=(30, 1), enable_events=True, key="-FOLDER4-"),
      
