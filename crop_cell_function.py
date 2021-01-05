@@ -63,9 +63,12 @@ def crop_cell(image, min_size=20000, max_size=90000, ar_thres=0.6):
     plt.show()            
     print('Summary: ')
     print(str(len(measure.regionprops(label_mask))) + ' cells are identified.')
-    print(str(num_1) + ' cells are too close to the boundary.')
-    print(str(num_2) + ' cells are too elongated.')
-    print(str(num_3) + ' segmented cells are too big.')
+    if num_1 > 0:
+        print(str(num_1) + ' cells are too close to the boundary.')
+    if num_2 > 0:
+        print(str(num_2) + ' cells are too elongated.')
+    if num_3 > 0:
+        print(str(num_3) + ' segmented cells are too big.')
     print(str(len(bounding_box)) + ' cells will be analyzed.')
         
     return (len(bounding_box), label_mask, bounding_box)
