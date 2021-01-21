@@ -27,6 +27,7 @@ def crop_cell(image, min_size=20000, max_size=90000, ar_thres=0.6):
     num_1 = 0 # number of cells that are too close to the image borders
     num_2 = 0 # number of cells that are too elongated
     num_3 = 0 # number of cells that are too big
+    num_4 = 0 # number of cells that are being analyzed
     
     for aCell in measure.regionprops(label_mask):
         
@@ -54,11 +55,14 @@ def crop_cell(image, min_size=20000, max_size=90000, ar_thres=0.6):
                 ax.add_patch(rect_r)
                 
             else: 
+                num_4 = num_4 + 1
                 cell_boundaries = [min_row - 30, min_col - 30, max_row + 30, max_col + 30]
                 bounding_box.append(cell_boundaries)
                 rect = mpatches.Rectangle((min_col, min_row), max_col - min_col, max_row - min_row,
                                           fill=False, edgecolor='green', linewidth=3)
                 ax.add_patch(rect)
+                ax.text(max_col-5, min_row+5, 'Cell num ' + str(num_4),
+                        horizontalalignment='right', verticalalignment='top', fontsize=12, family='sans-serif',color='green')
     ax.set_axis_off()
     plt.show()            
     print('Summary: ')
@@ -69,7 +73,7 @@ def crop_cell(image, min_size=20000, max_size=90000, ar_thres=0.6):
         print(str(num_2) + ' cells are too elongated.')
     if num_3 > 0:
         print(str(num_3) + ' segmented cells are too big.')
-    print(str(len(bounding_box)) + ' cells will be analyzed.')
+    print(str(num_4) + ' cells will be analyzed.')
         
     return (len(bounding_box), label_mask, bounding_box)
 
