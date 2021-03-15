@@ -188,6 +188,9 @@ def cell_seg_no_cell_crop(image, filename, save_destination = os.path.dirname(__
         
         for ii in range(cell.shape[0]): #going through individual slice of one single cell:
             
+            # this flag is used to tell what segmentation is used. 0 = histogram minima, 1 = triangle method
+            flag = 0
+            
             # finding threshold using the histogram function
             thresh_val, max_bg_val, max_obj_val = find_optimal_thres(image_smooth[ii, :, :], DEPTH)
             
@@ -212,7 +215,8 @@ def cell_seg_no_cell_crop(image, filename, save_destination = os.path.dirname(__
                 # measure the bounding box of the cell to eliminate cells too close to the borders
                 min_row, min_col, max_row, max_col = labels_stat[largest_idx].bbox
                 if min_row == 0 or min_col == 0 or max_row == img_bg.shape[0] or max_col == img_bg.shape[1]:
-                    print('Segmented area is too close to the image border. Try other segmentation method.')
+                    #print('Segmented area is too close to the image border. Try other segmentation method.')
+                    flag = 1
                     img_bg = intensity_seg_str(image_smooth[ii, :, :])
                 
                 else:   
@@ -226,14 +230,16 @@ def cell_seg_no_cell_crop(image, filename, save_destination = os.path.dirname(__
                     rem_pix = abs(sum(sum(diff_img)))
                     #print('Number of removed pixels: ' + str(rem_pix))
                     if rem_pix > tolerance:
-                        print('Histogram based segmentation removed too many pixels, now try other segmentation method.')
+                        #print('Histogram based segmentation removed too many pixels, now try other segmentation method.')
+                        flag = 1
                         # reroute to another thresholding method because the first segmentation method failed
                         img_bg = intensity_seg(image_smooth[ii, :, :])
                     else:
                         img_bg = img_bg_er_dil
                         #compare change in area with previous frame
                         if abs(np.bincount(img_bg.flat)[1:] - labels_stat[0].area)/labels_stat[0].area > 0.5:
-                            print('Segmented area is 50% larger than that of the previous frame. Try other segmentation method.')
+                            #print('Segmented area is 50% larger than that of the previous frame. Try other segmentation method.')
+                            flag = 1
                             img_bg = intensity_seg(image_smooth[ii, :, :])
 
             cell_masks[ii] = img_bg #save the mask to the array created in the beginning
@@ -259,7 +265,10 @@ def cell_seg_no_cell_crop(image, filename, save_destination = os.path.dirname(__
                             os.makedirs(results_dir)
                         plt.savefig(results_dir + filename + '_cell_' + str(kk) + '_' + str(ii) + '.png', transparent=True, dpi=150, bbox_inches='tight', pad_inches = 0)
                     plt.show()
-            print('Cell ' + str(kk+1) + '/' + str(cell_num) + ' Cell segmentation progress: ' + str(ii+1) + '/' + str(cell.shape[0]))
+            if flag == 0:
+                print('Cell segmentation progress: ' + str(ii+1) + '/' + str(cell.shape[0]) + '  Segmentation method: Histogram minima')
+            else:
+                print('Cell segmentation progress: ' + str(ii+1) + '/' + str(cell.shape[0]) + '  Segmentation method: Triangle method')
             
             if labels_stat == []:
                 print('no cells are identified.')

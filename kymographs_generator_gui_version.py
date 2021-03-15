@@ -59,16 +59,16 @@ def kymo_generator(image, fname, save_data, interval, pixel_size, bit_depth, sma
     
     for slice_number in range (all_cell_masks[0].shape[0]):
         
-        profile_line_1 = measure.profile_line(all_cell_masks[0][slice_number, :, :], src=(y, x), dst=(0, x), linewidth=width)
+        profile_line_1 = measure.profile_line(all_cell_masks[0][slice_number, :, :], src=(y, x), dst=(0, x), linewidth=width, mode='constant')
         kymo_1[:,slice_number] = np.flip(profile_line_1, axis=0)
        
-        profile_line_2 = measure.profile_line(all_cell_masks[0][slice_number, :, :], src=(y, x), dst=(all_cell_masks[0][slice_number, :, :].shape[0]-1, x), linewidth=width)
+        profile_line_2 = measure.profile_line(all_cell_masks[0][slice_number, :, :], src=(y, x), dst=(all_cell_masks[0][slice_number, :, :].shape[0]-1, x), linewidth=width, mode='constant')
         kymo_2[:,slice_number] = np.flip(profile_line_2, axis=0)
         
-        profile_line_3 = measure.profile_line(all_cell_masks[0][slice_number, :, :], src=(y, x), dst=(y, 0), linewidth=width)
+        profile_line_3 = measure.profile_line(all_cell_masks[0][slice_number, :, :], src=(y, x), dst=(y, 0), linewidth=width, mode='constant')
         kymo_3[:,slice_number] = np.flip(profile_line_3, axis=0)
         
-        profile_line_4 = measure.profile_line(all_cell_masks[0][slice_number, :, :], src=(y, x), dst=(y, all_cell_masks[0][slice_number, :, :].shape[1]-1), linewidth=width)
+        profile_line_4 = measure.profile_line(all_cell_masks[0][slice_number, :, :], src=(y, x), dst=(y, all_cell_masks[0][slice_number, :, :].shape[1]-1), linewidth=width, mode='constant')
         kymo_4[:,slice_number] = np.flip(profile_line_4, axis=0)
     
     all_kymos.append(kymo_1)
@@ -95,7 +95,7 @@ def kymo_generator(image, fname, save_data, interval, pixel_size, bit_depth, sma
     
     from measure_protrusions import measure_protrusions
     
-    all_maximas = []
+    all_plateau_idx = []
     all_minimas = []
     all_retraction_rate = []
     all_avg_speed = []
@@ -107,8 +107,8 @@ def kymo_generator(image, fname, save_data, interval, pixel_size, bit_depth, sma
     
     for n in range(len(all_normalized_coords)):
         
-        lowest_point_idx, maxima, minima, retraction_rate, avg_speed = measure_protrusions(normalized_coords = all_normalized_coords[n], frame_rate = interval)
-        all_maximas.append(maxima)
+        lowest_point_idx, plateau_idx, minima, retraction_rate, avg_speed = measure_protrusions(normalized_coords = all_normalized_coords[n], frame_rate = interval)
+        all_plateau_idx.append(plateau_idx)
         all_minimas.append(minima)
         all_retraction_rate.append(retraction_rate)
         all_avg_speed.append(avg_speed)
@@ -143,12 +143,17 @@ def kymo_generator(image, fname, save_data, interval, pixel_size, bit_depth, sma
     axes0.plot([x, x], [y, 0], color_1, [x, x], [y, all_cell_masks[0][slice_number, :, :].shape[0]-1], color_2,
                     [x, 0], [y, y], color_3, [x, all_cell_masks[0][slice_number, :, :].shape[1]-1], [y, y], color_4, linewidth = width, linestyle='dashed')
     axes0.axis('off')
-    
+   
+    ###################
+   
     axes1 = plt.subplot(gs[0,2])
     x_axis = np.linspace(start = 0, stop = int((len(all_normalized_coords[0])-1)*interval), num = len(all_normalized_coords[0]))
     axes1.plot(x_axis, all_normalized_coords[0], 'k')
-    axes1.plot([x_axis[all_lowest_point_idx[0]], x_axis[-1]], [all_normalized_coords[0][all_lowest_point_idx[0]], 
-                                                                          all_normalized_coords[0][-1]], color_1, linewidth = width/2, linestyle='dashed', label='Protrusion speed')
+    
+    last_slope_point_0 = x_axis[all_plateau_idx[0]]
+    
+    axes1.plot([x_axis[all_lowest_point_idx[0]], last_slope_point_0], [all_normalized_coords[0][all_lowest_point_idx[0]], 
+                                                                          all_normalized_coords[0][all_plateau_idx[0]]], color_1, linewidth = width/2, linestyle='dashed', label='Protrusion speed')
     
     # plot retraction points
     axes1.scatter(all_minimas[0]*interval, [all_normalized_coords[0][n] for n in all_minimas[0]], s=20, c='r', label='Retraction')
@@ -159,11 +164,16 @@ def kymo_generator(image, fname, save_data, interval, pixel_size, bit_depth, sma
     axes1.set_ylabel('Distance ‎(μm)')
     axes1.set_ylim(top = int(np.max(all_normalized_coords)+2)) #limit y axis to be the maximum of all the numbers
     
+    ###################
+    
     axes2 = plt.subplot(gs[0,3], sharex=axes1, sharey=axes1)
     x_axis = np.linspace(start = 0, stop = int((len(all_normalized_coords[1])-1)*interval), num = len(all_normalized_coords[1]))
     axes2.plot(x_axis, all_normalized_coords[1], 'k')
-    axes2.plot([x_axis[all_lowest_point_idx[1]], x_axis[-1]], [all_normalized_coords[1][all_lowest_point_idx[1]], 
-                                                                          all_normalized_coords[1][-1]], color_2, linewidth = width/2, linestyle='dashed', label='Protrusion speed')
+    
+    last_slope_point_1 = x_axis[all_plateau_idx[1]]
+    
+    axes2.plot([x_axis[all_lowest_point_idx[1]], last_slope_point_1], [all_normalized_coords[1][all_lowest_point_idx[1]], 
+                                                                          all_normalized_coords[1][all_plateau_idx[1]]], color_2, linewidth = width/2, linestyle='dashed', label='Protrusion speed')
     
     axes2.scatter(all_minimas[1]*interval, [all_normalized_coords[1][n] for n in all_minimas[1]], s=20, c='r', label='Retraction')
     axes2.legend(loc="lower right")
@@ -171,11 +181,16 @@ def kymo_generator(image, fname, save_data, interval, pixel_size, bit_depth, sma
         spine.set_edgecolor(color_2)
         spine.set_linewidth(3)
     
+    ###################
+    
     axes3 = plt.subplot(gs[1,2], sharex=axes1, sharey=axes1)
     x_axis = np.linspace(start = 0, stop = int((len(all_normalized_coords[2])-1)*interval), num = len(all_normalized_coords[2]))
     axes3.plot(x_axis, all_normalized_coords[2], 'k')
-    axes3.plot([x_axis[all_lowest_point_idx[2]], x_axis[-1]], [all_normalized_coords[2][all_lowest_point_idx[2]], 
-                                                                          all_normalized_coords[2][-1]], color_3, linewidth = width/2, linestyle='dashed', label='Protrusion speed')
+    
+    last_slope_point_2 = x_axis[all_plateau_idx[2]]
+    
+    axes3.plot([x_axis[all_lowest_point_idx[2]], last_slope_point_2], [all_normalized_coords[2][all_lowest_point_idx[2]], 
+                                                                          all_normalized_coords[2][all_plateau_idx[2]]], color_3, linewidth = width/2, linestyle='dashed', label='Protrusion speed')
     
     axes3.scatter(all_minimas[2]*interval, [all_normalized_coords[2][n] for n in all_minimas[2]], s=20, c='r', label='Retraction')
     axes3.legend(loc="lower right")
@@ -185,11 +200,16 @@ def kymo_generator(image, fname, save_data, interval, pixel_size, bit_depth, sma
     axes3.set_xlabel('Time (s)')
     axes3.set_ylabel('Distance ‎(μm)')
     
+    ###################
+    
     axes4 = plt.subplot(gs[1,3], sharex=axes1, sharey=axes1)
     x_axis = np.linspace(start = 0, stop = int((len(all_normalized_coords[3])-1)*interval), num = len(all_normalized_coords[3]))
     axes4.plot(x_axis, all_normalized_coords[3], 'k')
-    axes4.plot([x_axis[all_lowest_point_idx[3]], x_axis[-1]], [all_normalized_coords[3][all_lowest_point_idx[3]], 
-                                                                          all_normalized_coords[3][-1]], color_4, linewidth = width/2, linestyle='dashed', label='Protrusion speed')
+    
+    last_slope_point_3 = x_axis[all_plateau_idx[3]]
+    
+    axes4.plot([x_axis[all_lowest_point_idx[3]], last_slope_point_3], [all_normalized_coords[3][all_lowest_point_idx[3]], 
+                                                                          all_normalized_coords[3][all_plateau_idx[3]]], color_4, linewidth = width/2, linestyle='dashed', label='Protrusion speed')
     axes4.scatter(all_minimas[3]*interval, [all_normalized_coords[3][n] for n in all_minimas[3]], s=20, c='r', label='Retraction')
     axes4.legend(loc="lower right")
     for spine in axes4.spines.values():

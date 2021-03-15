@@ -96,7 +96,8 @@ layout = [
     #[sg.Column(image_params_column)],
     
 
-    [sg.Text("by Ernest in 2020", justification='right', font=('Arial', 9), size=(52, 1))]
+    [sg.Text("Last updated by Ernest in 2021", justification='right', font=('Arial', 9), size=(52, 1))]
+    
 
 ]
 
@@ -152,7 +153,6 @@ while True:
             print(bit_depth)  
             save_destination = values['-FOLDER3-']    
             cell_spreading(image, fname, save_masks, save_data, save_contour, show_img, interval, pixel_size, bit_depth, small_obj, save_destination)
-        
         except:
             print('Error')
             
@@ -182,9 +182,9 @@ while True:
             print(bit_depth)  
             save_destination = values['-FOLDER4-']
             kymo_generator(image, fname, save_data, interval, pixel_size, bit_depth, small_obj = small_obj, save_destination = save_destination)
-            
         except:
             print('Error')
+
 
 window.close()
 
