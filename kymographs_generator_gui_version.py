@@ -9,7 +9,6 @@ from skimage import io, measure
 import matplotlib.pyplot as plt
 import numpy as np
 from cell_segmentation import cell_seg_no_cell_crop
-from skimage.morphology import local_minima, local_maxima
 import statistics
 from matplotlib import gridspec
 import pandas as pd
@@ -161,7 +160,7 @@ def kymo_generator(image, fname, save_data, interval, pixel_size, bit_depth, sma
     for spine in axes1.spines.values():
         spine.set_edgecolor(color_1)
         spine.set_linewidth(3)
-    axes1.set_ylabel('Distance ‎(μm)')
+    axes1.set_ylabel('Distance ‎(µm)')
     axes1.set_ylim(top = int(np.max(all_normalized_coords)+2)) #limit y axis to be the maximum of all the numbers
     
     ###################
@@ -198,7 +197,7 @@ def kymo_generator(image, fname, save_data, interval, pixel_size, bit_depth, sma
         spine.set_edgecolor(color_3)
         spine.set_linewidth(3)
     axes3.set_xlabel('Time (s)')
-    axes3.set_ylabel('Distance ‎(μm)')
+    axes3.set_ylabel('Distance ‎(µm)')
     
     ###################
     
@@ -221,24 +220,25 @@ def kymo_generator(image, fname, save_data, interval, pixel_size, bit_depth, sma
     
     
     ################################dividing line###########################################
-    df = pd.DataFrame()    
-    
-    df[fname + ' Kymo_1'] = pd.Series(all_normalized_coords[0])
-    df[fname + ' Kymo_1' + ' retraction pts'] = pd.Series(all_minimas[0]*interval)
-    
-    df[fname + ' Kymo_2'] = pd.Series(all_normalized_coords[1])
-    df[fname + ' Kymo_2' + ' retraction pts'] = pd.Series(all_minimas[1]*interval)
-    
-    df[fname + ' Kymo_3'] = pd.Series(all_normalized_coords[2])
-    df[fname + ' Kymo_3' + ' retraction pts'] = pd.Series(all_minimas[2]*interval)
-    
-    df[fname + ' Kymo_4'] = pd.Series(all_normalized_coords[3])
-    df[fname + ' Kymo_4' + ' retraction pts'] = pd.Series(all_minimas[3]*interval)
-    
-    df['Time'] = pd.Series(np.linspace(start = 0, stop = int((len(df.index)-1)*interval), num = len(df.index)))
-    df = df.set_index('Time') 
-    
     if save_data:
+    
+        df = pd.DataFrame()    
+        
+        df[fname + ' Kymo_1'] = pd.Series(all_normalized_coords[0])
+        df[fname + ' Kymo_1' + ' retraction pts'] = pd.Series(all_minimas[0]*interval)
+        
+        df[fname + ' Kymo_2'] = pd.Series(all_normalized_coords[1])
+        df[fname + ' Kymo_2' + ' retraction pts'] = pd.Series(all_minimas[1]*interval)
+        
+        df[fname + ' Kymo_3'] = pd.Series(all_normalized_coords[2])
+        df[fname + ' Kymo_3' + ' retraction pts'] = pd.Series(all_minimas[2]*interval)
+        
+        df[fname + ' Kymo_4'] = pd.Series(all_normalized_coords[3])
+        df[fname + ' Kymo_4' + ' retraction pts'] = pd.Series(all_minimas[3]*interval)
+        
+        df['Time'] = pd.Series(np.linspace(start = 0, stop = int((len(df.index)-1)*interval), num = len(df.index)))
+        df = df.set_index('Time') 
+       
         df.to_excel(save_destination + "/" + fname + "_kymographs" + ".xlsx")
     
     return print('done')

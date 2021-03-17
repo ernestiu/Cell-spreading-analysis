@@ -6,6 +6,9 @@ from scipy.signal import find_peaks, savgol_filter
 from scipy.optimize import curve_fit
 import matplotlib.pyplot as plt
 
+from scipy.special import expit
+import math
+
 
 def logistic_growth(t, a, b, c):
     return c / (1 + a * np.exp(-b*t))
@@ -33,12 +36,12 @@ def logistic_fit(all_areas):
     
     (a, b, c), cov = curve_fit(logistic_growth, x, y)
 
-    plt.scatter(x, y, s=0.8)
-    plt.plot(x, logistic_growth(x, a, b, c),'r-',  linewidth=3)
-    plt.xlabel('Frame')
-    plt.ylabel('Area')
-    plt.legend(['Logistic model', 'Experimental data'])
-    plt.show()
+    # plt.scatter(x, y, s=0.8)
+    # plt.plot(x, logistic_growth(x, a, b, c),'r-',  linewidth=3)
+    # plt.xlabel('Frame')
+    # plt.ylabel('Distance (pixel)')
+    # plt.legend(['Logistic model', 'Experimental data'])
+    # plt.show()
     return a, b, c
 
 def measure_protrusions(normalized_coords, frame_rate = 6):

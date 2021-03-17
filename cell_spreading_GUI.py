@@ -15,7 +15,6 @@ from kymographs_generator_gui_version import kymo_generator
 
 tab1_layout = [
 
-#image_params_column = [
 
     [sg.Text("Image location", font=('Arial', 11))],
 
@@ -93,10 +92,10 @@ tab2_layout = [
 layout = [
     
     [sg.TabGroup([[sg.Tab('Cell spread area', tab1_layout), sg.Tab('Kymograph generator & analysis', tab2_layout)]])],
-    #[sg.Column(image_params_column)],
+
     
 
-    [sg.Text("Last updated by Ernest in 2021", justification='right', font=('Arial', 9), size=(52, 1))]
+    [sg.Text("Last updated by Ernest in Mar, 2021", justification='right', font=('Arial', 9), size=(52, 1))]
     
 
 ]
