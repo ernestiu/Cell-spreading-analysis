@@ -88,7 +88,9 @@ def measure_protrusions(normalized_coords, frame_rate = 6):
     
     # find retraction events
     minima, _ = find_peaks([normalized_coords[k]*-1 for k in range(lowest_point_idx, plateau_time)], distance=3)
-    minima = minima[minima > lowest_point_idx]
+    # minima = minima[minima > lowest_point_idx]
+    for n in range(len(minima)):
+        minima[n] = minima[n] + lowest_point_idx  
     
     spread_duration = len(normalized_coords[lowest_point_idx:plateau_time]) # in terms of number of frames
     retraction_rate = len(minima)/(spread_duration*frame_rate//60)
