@@ -1,24 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-This functions takes a timelapse image, segment individual cells and measure cell area, circularity and aspect ratio over time.
---------
-Input parameters:
-    
-    1. image: numpy array of the image
-    2. fname: string, filename of the image
-    3. save_masks: boolean, indicate whether individual cell masks generated should be saved 
-    4. save_data: boolean, indicate whether cell area, circularity and aspect ratio should be exported as an excel spreadsheet
-    5. interval: integer, how frequent images were acquired (will affect the data in the spreadsheet)
-    6. pixel_size: float, area of a pixel
-    7. bit_depth: integer
-    8. small_obj: integer, the smallest acceptable object size in pixel
-    9. save_destination: string, the saving destination of the masks, images etc
-    
-Outputs:
-    print "done"
-    
-By Ernest Dec 2020    
-"""
+
 import numpy as np
 from skimage import io
 import matplotlib.pyplot as plt
@@ -31,7 +12,26 @@ import os
 
 
 def cell_spreading(image, fname, save_masks, save_data, save_contour, show_img, interval, pixel_size, bit_depth, small_obj, save_destination):
-
+    """
+    This function takes a timelapse image, segment individual cells and measure cell area, circularity and aspect ratio over time.
+    --------
+    Input parameters:
+        
+        1. image: numpy array of the image
+        2. fname: string, filename of the image
+        3. save_masks: boolean, indicate whether individual cell masks generated should be saved 
+        4. save_data: boolean, indicate whether cell area, circularity and aspect ratio should be exported as an excel spreadsheet
+        5. interval: integer, how frequent images were acquired (will affect the data in the spreadsheet)
+        6. pixel_size: float, area of a pixel
+        7. bit_depth: integer
+        8. small_obj: integer, the smallest acceptable object size in pixel
+        9. save_destination: string, the saving destination of the masks, images etc
+        
+    Outputs:
+        print "done"
+        
+    By Ernest Dec 2020    
+    """
     cell_num, label_mask, bounding_box = crop_cell(image)
     
     all_cell_masks, all_cell_props = cell_seg(image, cell_num, bounding_box, filename = fname, save_destination = save_destination,

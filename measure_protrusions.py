@@ -36,8 +36,8 @@ def logistic_fit(all_areas):
     
     (a, b, c), cov = curve_fit(logistic_growth, x, y)
 
-    # plt.scatter(x, y, s=0.8)
-    # plt.plot(x, logistic_growth(x, a, b, c),'r-',  linewidth=3)
+    # plt.scatter(x, y, s=1)
+    # plt.plot(x, logistic_growth(x, a, b, c),'r-',  linewidth=3, alpha=0.3)
     # plt.xlabel('Frame')
     # plt.ylabel('Distance (pixel)')
     # plt.legend(['Logistic model', 'Experimental data'])

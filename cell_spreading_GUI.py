@@ -1,9 +1,23 @@
 # -*- coding: utf-8 -*-
 """
-This is the GUI for cell spreading analysis.
-Simply click Run to initial the GUI.
 
-By Ernest Dec 2020
+Copyright (c) 2020, Ernest Iu
+
+
+Created by the Plotnikov Lab at the University of Toronto
+
+Email Contacts:
+Ernest Iu: ernest.iu@mail.utoronto.ca
+Sergey Plotnikov: sergey.plotnikov@utoronto.ca
+
+
+This script is part of a software designed for the analysis of cell
+spreading assays. This software can be modified/redistributed under 
+the terms described by the BSD 2-Clause License. A copy of this license 
+should have been present within the software. 
+If not, please visit the following link: 
+https://github.com/ernestiu/Cell-spreading-analysis.git 
+
 """
 
 import PySimpleGUI as sg
