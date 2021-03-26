@@ -2,7 +2,8 @@
 """
 find_optimal_thres finds the threshold separating the background and foreground.
 This code can be used for images with a uniform background
-and objects of one single intensity distribution.
+and objects of one single intensity distribution. This code
+is adopted from M Machacek, G Danuser, Biophys J (2006).
 
 By Ernest Dec 2020
 """

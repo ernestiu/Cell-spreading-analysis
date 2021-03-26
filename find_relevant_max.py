@@ -1,5 +1,6 @@
 '''
-find_relevant_max extracts the relevant maximas and minimas 
+find_relevant_max extracts the relevant maximas and minimas. This code
+is adopted from M Machacek, G Danuser, Biophys J (2006).
 
 By Ernest Dec 2020
                            
