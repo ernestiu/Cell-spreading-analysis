@@ -226,15 +226,23 @@ def kymo_generator(image, fname, save_data, interval, pixel_size, bit_depth, sma
         
         df[fname + ' Kymo_1'] = pd.Series(all_normalized_coords[0])
         df[fname + ' Kymo_1' + ' retraction pts'] = pd.Series(all_minimas[0]*interval)
+        df[fname + ' Kymo_1' + ' plateau idx'] = pd.Series(all_plateau_idx[0])
+        df[fname + ' Kymo_1' + ' protrusion beginning idx'] = pd.Series(all_lowest_point_idx[0])
         
         df[fname + ' Kymo_2'] = pd.Series(all_normalized_coords[1])
         df[fname + ' Kymo_2' + ' retraction pts'] = pd.Series(all_minimas[1]*interval)
+        df[fname + ' Kymo_2' + ' plateau idx'] = pd.Series(all_plateau_idx[1])
+        df[fname + ' Kymo_2' + ' protrusion beginning idx'] = pd.Series(all_lowest_point_idx[1])
         
         df[fname + ' Kymo_3'] = pd.Series(all_normalized_coords[2])
         df[fname + ' Kymo_3' + ' retraction pts'] = pd.Series(all_minimas[2]*interval)
+        df[fname + ' Kymo_3' + ' plateau idx'] = pd.Series(all_plateau_idx[2])
+        df[fname + ' Kymo_3' + ' protrusion beginning idx'] = pd.Series(all_lowest_point_idx[2])
         
         df[fname + ' Kymo_4'] = pd.Series(all_normalized_coords[3])
         df[fname + ' Kymo_4' + ' retraction pts'] = pd.Series(all_minimas[3]*interval)
+        df[fname + ' Kymo_4' + ' plateau idx'] = pd.Series(all_plateau_idx[3])
+        df[fname + ' Kymo_4' + ' protrusion beginning idx'] = pd.Series(all_lowest_point_idx[3])
         
         df['Time'] = pd.Series(np.linspace(start = 0, stop = int((len(df.index)-1)*interval), num = len(df.index)))
         df = df.set_index('Time') 
